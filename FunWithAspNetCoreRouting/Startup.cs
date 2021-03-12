@@ -62,7 +62,9 @@ namespace FunWithAspNetCoreRouting
 
             // Actions are either conventionally-routed or attribute-routed.
             // * conventionally-routed: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#cr
+            // Conventional routing typically used with controllers and views.
             // * attribute-routed: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#ar
+            // Attribute routing used with REST APIs. If you're primarily interested in routing for REST APIs, jump to the Attribute routing for REST APIs section.
 
             // Adds EndpointMiddleware to the request handling pipeline.
             app.UseEndpoints(endpoints =>

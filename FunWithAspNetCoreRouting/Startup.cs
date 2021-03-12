@@ -60,6 +60,10 @@ namespace FunWithAspNetCoreRouting
             // The middleware looks for a corresponding Microsoft.AspNetCore.Http.Endpoint object.
             app.UseRouting();
 
+            // Actions are either conventionally-routed or attribute-routed.
+            // * conventionally-routed: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#cr
+            // * attribute-routed: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#ar
+
             // Adds EndpointMiddleware to the request handling pipeline.
             app.UseEndpoints(endpoints =>
             {

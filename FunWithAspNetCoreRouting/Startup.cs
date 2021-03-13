@@ -18,6 +18,8 @@ namespace FunWithAspNetCoreRouting
         // then you may replace built-in IoC container with a third party container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // NOTE: I'm not sure I need to use AddMvc here. It's a REST API service. AddControllers should be enough.
+            //services.AddControllers();
             services.AddMvc();
 
             // Adds routing middleware. It's a part of .AddMvc() in .NET Core 3.
@@ -69,6 +71,9 @@ namespace FunWithAspNetCoreRouting
             // Adds EndpointMiddleware to the request handling pipeline.
             app.UseEndpoints(endpoints =>
             {
+                // MapControllers is enough for RESP API service.
+                // endpoints.MapControllers();
+
                 endpoints.MapControllerRoute("default", "{controller=Person}/{action=GetAsync}");
 
                 endpoints.MapGet("/", async context =>

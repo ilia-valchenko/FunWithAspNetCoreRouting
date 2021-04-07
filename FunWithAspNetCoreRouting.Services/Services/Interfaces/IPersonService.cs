@@ -8,10 +8,10 @@ namespace FunWithAspNetCoreRouting.Services.Services.Interfaces
 {
     public interface IPersonService
     {
-        Task<IEnumerable<Person>> GetAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<IEnumerable<PersonEntity>> GetAsync(CancellationToken cancellationToken = default(CancellationToken));
 
-        Task<IEnumerable<Person>> GetAsync(string firstName, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IEnumerable<PersonEntity>> GetAsync(string firstName, CancellationToken cancellationToken = default(CancellationToken));
 
-        Task<Person> GetAsync(Guid id, CancellationToken cancellationToken = default(CancellationToken));
+        Task<PersonEntity> GetAsync(Guid id, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

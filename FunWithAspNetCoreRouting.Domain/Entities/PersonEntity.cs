@@ -1,6 +1,6 @@
 ﻿namespace FunWithAspNetCoreRouting.Domain.Entities
 {
-    public class Person : BaseEntity
+    public class PersonEntity : BaseEntity
     {
         public string FirstName { get; set; }
 

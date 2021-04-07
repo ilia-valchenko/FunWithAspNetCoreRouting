@@ -22,6 +22,10 @@ namespace FunWithAspNetCoreRouting
             //services.AddControllers();
             services.AddMvc();
 
+            // Add Swagger middleware.
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen();
+
             // Adds routing middleware. It's a part of .AddMvc() in .NET Core 3.
             // So you don't need to add it manually.
             //services.AddRouting();
@@ -38,6 +42,21 @@ namespace FunWithAspNetCoreRouting
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Swashbuckle relies on MVC's Microsoft.AspNetCore.Mvc.ApiExplorer to discover the routes and endpoints.
+            // If the project calls AddMvc, routes and endpoints are discovered automatically.
+            // When calling AddMvcCore, the AddApiExplorer method must be explicitly called.
+            // For more information, see Swashbuckle, ApiExplorer, and Routing.
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             // Q: What are the differences between app.UseRouting() and app.UseEndPoints()?
             // A: UseRouting matches request to an endpoint. UseEndpoints executes the matched endpoint.
@@ -69,17 +88,23 @@ namespace FunWithAspNetCoreRouting
             // Attribute routing used with REST APIs. If you're primarily interested in routing for REST APIs, jump to the Attribute routing for REST APIs section.
 
             // Adds EndpointMiddleware to the request handling pipeline.
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    // MapControllers is enough for RESP API service.
+            //    // endpoints.MapControllers();
+
+            //    endpoints.MapControllerRoute("default", "{controller=Person}/{action=GetAsync}");
+
+            //    endpoints.MapGet("/", async context =>
+            //    {
+            //        await context.Response.WriteAsync("Hello World!");
+            //    });
+            //});
+
             app.UseEndpoints(endpoints =>
             {
-                // MapControllers is enough for RESP API service.
-                // endpoints.MapControllers();
-
-                endpoints.MapControllerRoute("default", "{controller=Person}/{action=GetAsync}");
-
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

@@ -19,8 +19,8 @@ namespace FunWithAspNetCoreRouting
         public void ConfigureServices(IServiceCollection services)
         {
             // NOTE: I'm not sure I need to use AddMvc here. It's a REST API service. AddControllers should be enough.
-            //services.AddControllers();
-            services.AddMvc();
+            services.AddControllers();
+            //services.AddMvc();
 
             // Add Swagger middleware.
             // Register the Swagger generator, defining 1 or more Swagger documents

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,12 +21,36 @@ namespace FunWithAspNetCoreRouting
             services.AddControllers();
             //services.AddMvc();
 
+            // IMPORTANT!
+            // When you call .AddMvc() you implicitly call (according to a source code) the following methods:
+            // * .AddMvcCore() --> calls .AddRouting() and registers IControllerFactory, IActionInvokerFactory, IFilterProvider, IApplicationModelProvider, IActionDescriptorProvider, IActionSelector
+            // * .AddApiExplorer() --> registers IApiDescriptionProvider, IApiDescriptionGroupCollectionProvider
+            // * .AddAuthorization() --> calls .AddAuthorizationCore(configure) and .AddAuthorizationPolicyEvaluator()
+            // * .AddFormatterMappings()
+            // * .AddViews()
+            // * .AddRazorViewEngine()
+            // * .AddRazorPages()
+            // * .AddCacheTagHelper()
+            // * .AddDataAnnotations()
+            // * .AddJsonFormatters()
+            // * .AddCors()
+
+            // IMPORTANT!
+            // When you call .AddControllers() you implicitly call (according to a source code) the following methods:
+            // * .AddMvcCore() --> calls .AddRouting()
+            // * .AddApiExplorer()
+            // * .AddAuthorization()
+            // * .AddCors()
+            // * .AddDataAnnotations()
+            // * .AddFormatterMappings()
+
             // Add Swagger middleware.
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
 
             // Adds routing middleware. It's a part of .AddMvc() in .NET Core 3.
             // So you don't need to add it manually.
+            // What about .AddControllers()? Why we don't need to use .AddRouting()?
             //services.AddRouting();
 
             Services.Infrastructure.Bootstrapper.ConfigureServices(services);
@@ -89,22 +112,17 @@ namespace FunWithAspNetCoreRouting
 
             // Adds EndpointMiddleware to the request handling pipeline.
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    // MapControllers is enough for RESP API service.
-            //    // endpoints.MapControllers();
-
-            //    endpoints.MapControllerRoute("default", "{controller=Person}/{action=GetAsync}");
-
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
-
             app.UseEndpoints(endpoints =>
             {
+                // .MapControllers() is enough for RESP API service.
                 endpoints.MapControllers();
+
+                //endpoints.MapControllerRoute("default", "{controller=Person}/{action=GetAsync}");
+
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello World!");
+                //});
             });
         }
     }

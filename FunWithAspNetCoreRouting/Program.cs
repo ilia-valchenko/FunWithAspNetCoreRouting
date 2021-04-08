@@ -14,7 +14,7 @@ namespace FunWithAspNetCoreRouting
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup7>();
+                    webBuilder.UseStartup<Startup_RouteConstraints>();
                 });
     }
 }

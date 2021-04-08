@@ -102,7 +102,14 @@ namespace FunWithAspNetCoreRouting
 
             // Adds EndpointRoutingMiddleware to the request handling pipeline.
             // The middleware looks for a corresponding Microsoft.AspNetCore.Http.Endpoint object.
+            // The information about a route is stored in an instance of the RouteData class.
+            // You can find it in the RouteData property of the RouteContext class.
             app.UseRouting();
+
+            // RouteData consist of:
+            // * Values - dictionary of route segments
+            // * DataTokens - additional route values
+            // * Routers - collection of all routes which are used for matching. The last element in the collection is a route which is matched.
 
             // Actions are either conventionally-routed or attribute-routed.
             // * conventionally-routed: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-5.0#cr
@@ -111,7 +118,6 @@ namespace FunWithAspNetCoreRouting
             // Attribute routing used with REST APIs. If you're primarily interested in routing for REST APIs, jump to the Attribute routing for REST APIs section.
 
             // Adds EndpointMiddleware to the request handling pipeline.
-
             app.UseEndpoints(endpoints =>
             {
                 // .MapControllers() is enough for RESP API service.

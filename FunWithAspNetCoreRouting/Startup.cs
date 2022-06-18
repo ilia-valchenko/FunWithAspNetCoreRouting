@@ -120,10 +120,20 @@ namespace FunWithAspNetCoreRouting
             // Adds EndpointMiddleware to the request handling pipeline.
             app.UseEndpoints(endpoints =>
             {
+                // #1
                 // .MapControllers() is enough for RESP API service.
+                // It doesn't make any assumptions about routing. It will rely only on the user doing attribute routing.
                 endpoints.MapControllers();
 
+                // #2
+                // Adds an endpoint to a specific action. Specifies a route with given [name], [pattern], [defaults], [constraints], [dataTokens].
+                //endpoints.MapControllerRoute(string name, string pattern, [object defaults = null], [object dataTokens = null]);
                 //endpoints.MapControllerRoute("default", "{controller=Person}/{action=GetAsync}");
+
+                // #3
+                //endpoints.MapDefaultControllerRoute();
+                // It's basically the same as the line below. It's just a shorthands for the line below.
+                // endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
                 //endpoints.MapGet("/", async context =>
                 //{

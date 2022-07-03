@@ -16,7 +16,7 @@ There are some interesting steps from APS .NET Core pipeline:
  
  ## Filters order
  1. Authorization filters
- 2. Resource filters
- 3. Action filters
- 4. Exception filters
- 5. Result filters
+ 2. Resource filters (Resource filter is useful to implement caching or otherwise short-circuit the filter pipeline for performance reasons. It runs before model binding, so it can influence model binding.)
+ 3. Action filters (Run code immediately before or after a method is called.)
+ 4. Exception filters (Global policy to handle exceptions.)
+ 5. Result filters (Run before and after the action is executed successfully.)

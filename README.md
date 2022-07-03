@@ -13,3 +13,10 @@ There are some interesting steps from APS .NET Core pipeline:
  - DEBUG | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Executing controller factory for controller `AspNetCoreLogging.Controllers.WeatherForecastController`
  - DEBUG | Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker | Executed controller factory for controller `AspNetCoreLogging.Controllers.WeatherForecastController`
  - DEBUG | Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder | Attempting to bind parameter `forecast` of type `AspNetCoreLogging.Services.Models.WeatherForecast`
+ 
+ ## Filters order
+ 1. Authorization filters
+ 2. Resource filters
+ 3. Action filters
+ 4. Exception filters
+ 5. Result filters

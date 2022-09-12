@@ -7,6 +7,12 @@ namespace FunWithAspNetCoreRouting
     {
         public static void Main(string[] args)
         {
+            // The WebApplicationBuilder: IHostBuilder does the following things:
+            // * configure application;
+            // * add services;
+            // * configure logging;
+            // * configure environment;
+            // * configure IHostBuilder and IWebHostBuilder.
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -7,6 +7,8 @@ namespace FunWithAspNetCoreRouting
     {
         public static void Main(string[] args)
         {
+            // public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteBuilder
+
             // The WebApplicationBuilder: IHostBuilder does the following things:
             // * configure application;
             // * add services;
